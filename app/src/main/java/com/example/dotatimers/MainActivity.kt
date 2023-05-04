@@ -63,12 +63,19 @@ fun Timer(firstWarning: Int, secondWarning: Int){
                     style = MaterialTheme.typography.headlineMedium,
                     modifier = Modifier.align(Alignment.Center)
                 )
+
             }
             Spacer(modifier= Modifier.height(8.dp))
-            Button(
-                onClick = { placeholder() }
-            ){
-                Text(text = "Button")
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                Button(
+                    onClick = { placeholder() },
+                    modifier = Modifier.align(Alignment.BottomEnd)
+                ) {
+                    Text(text = "Button")
+                }
             }
         }
     }
