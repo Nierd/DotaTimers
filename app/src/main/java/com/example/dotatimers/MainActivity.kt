@@ -10,20 +10,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.dotatimers.ui.theme.DotaTimersTheme
@@ -43,6 +38,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Timer(firstWarning: Int, secondWarning: Int){
+    val number = 100
     Surface(
         modifier = Modifier.padding(8.dp),
         shape = RoundedCornerShape(8.dp)
@@ -60,7 +56,15 @@ fun Timer(firstWarning: Int, secondWarning: Int){
             ){
                 Text(
                     text = "100",
-                    style = MaterialTheme.typography.headlineMedium,
+                    style = MaterialTheme.typography.headlineMedium.copy(
+                        color = if (number >= firstWarning){
+                            MaterialTheme.colorScheme.error
+                        }else if (number >= secondWarning) {
+                            MaterialTheme.colorScheme.error
+                        }else{
+                            MaterialTheme.colorScheme.onBackground
+                        }
+                    ),
                     modifier = Modifier.align(Alignment.Center)
                 )
 
@@ -88,5 +92,5 @@ fun placeholder(){
 @Composable
 @Preview
 fun TimerPreview(){
-    Timer(10, 50)
+    Timer(500, 50)
 }
