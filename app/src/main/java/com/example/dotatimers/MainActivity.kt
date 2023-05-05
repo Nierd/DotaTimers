@@ -3,8 +3,11 @@ package com.example.dotatimers
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,6 +22,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.dotatimers.ui.theme.DotaTimersTheme
@@ -37,7 +42,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Timer(firstWarning: Int, secondWarning: Int){
+fun TimerCard(firstWarning: Int, secondWarning: Int){
     val number = 100
     Surface(
         modifier = Modifier.padding(8.dp),
@@ -54,6 +59,13 @@ fun Timer(firstWarning: Int, secondWarning: Int){
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(8.dp))
             ){
+                Image(
+                    painter = painterResource(R.drawable.ic_launcher_foreground),
+                    contentDescription = "Dota Logo",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.align(Alignment.TopCenter)
+
+                )
                 Text(
                     text = "100",
                     style = MaterialTheme.typography.headlineMedium.copy(
@@ -65,20 +77,33 @@ fun Timer(firstWarning: Int, secondWarning: Int){
                             MaterialTheme.colorScheme.onBackground
                         }
                     ),
-                    modifier = Modifier.align(Alignment.Center)
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .align(Alignment.BottomCenter)
                 )
 
             }
             Spacer(modifier= Modifier.height(8.dp))
-            Box(
+            Row(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(
                     onClick = { placeholder() },
-                    modifier = Modifier.align(Alignment.BottomEnd)
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end=4.dp)
                 ) {
-                    Text(text = "Button")
+                    Text(text = "Reset")
+                }
+                Button(
+                    onClick = {placeholder()},
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end=4.dp)
+                ){
+                    Text(text = "Start")
                 }
             }
         }
@@ -91,6 +116,6 @@ fun placeholder(){
 
 @Composable
 @Preview
-fun TimerPreview(){
-    Timer(500, 50)
+fun TimerCardPreview(){
+    TimerCard(500, 50)
 }
